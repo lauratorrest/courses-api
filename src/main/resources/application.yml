@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gestion_empleados
+  profiles:
+    active: local
+
+---
+spring:
+  profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/courses_system
+    username: postgres
+    password: postgres
+    test-on-borrow: true
+    validation-query: SELECT 1 FROM dual
+  jpa:
+    show-sql: true
+    hibernate:
+      format-sql: true
+      ddl-auto: none
