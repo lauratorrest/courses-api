@@ -2,7 +2,7 @@ package com.courses.api.infrastructure.api.controller;
 
 import com.courses.api.application.course.CourseGetApplication;
 import com.courses.api.infrastructure.api.dto.response.CourseDetailsResponse;
-import com.courses.api.infrastructure.api.dto.response.CourseResponse;
+import com.courses.api.infrastructure.api.dto.response.CourseBasicResponse;
 import com.courses.api.infrastructure.api.mapper.course.CourseDetailsResponseMapper;
 import com.courses.api.infrastructure.api.mapper.course.CourseResponseMapper;
 import java.util.List;
@@ -22,7 +22,7 @@ public class CourseController {
   private final CourseDetailsResponseMapper detailsResponseMapper;
 
   @GetMapping
-  public ResponseEntity<List<CourseResponse>> getAllCourses(){
+  public ResponseEntity<List<CourseBasicResponse>> getAllCourses(){
     return ResponseEntity.ok(courseResponseMapper.toResponse(
         courseGetApplication.getAllCourses()
     ));
