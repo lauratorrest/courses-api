@@ -1,5 +1,6 @@
-package com.courses.api.domain.entity;
+package com.courses.api.infrastructure.api.dto.response;
 
+import com.courses.api.domain.entity.LanguageEnum;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Course {
+public class CourseDetailsResponse {
   private Long id;
   private String title;
   private String subTitle;
@@ -18,7 +19,7 @@ public class Course {
   private Double punctuation;
   private Integer gradeCount;
   private Integer studentsCount;
-  private User creator;
+  private String creatorName;
   private LanguageEnum language;
   private Double price;
   private String skillsToLearn;

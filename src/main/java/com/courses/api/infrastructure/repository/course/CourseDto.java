@@ -1,8 +1,10 @@
 package com.courses.api.infrastructure.repository.course;
 
 import com.courses.api.domain.entity.LanguageEnum;
+import com.courses.api.infrastructure.repository.assembler.DurationConverter;
 import com.courses.api.infrastructure.repository.user.UserDto;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,7 +30,7 @@ public class CourseDto {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String title;
-  @Column(name = "subtitle")
+  @Column(name = "sub_title")
   private String subTitle;
   @Column(name = "main_picture_url")
   private String mainPictureUrl;
@@ -44,13 +46,15 @@ public class CourseDto {
   private UserDto creator;
   @Enumerated(EnumType.STRING)
   private LanguageEnum language;
+  private Double price;
   @Column(name = "skills_to_learn")
   private String skillsToLearn;
   @Column(name = "sections_count")
   private Integer sectionsCount;
   @Column(name = "classes_count")
   private Integer classesCount;
-  @Column(name = "minutes_count")
+  @Column(name = "minutes_count",columnDefinition = "interval")
+  @Convert(converter = DurationConverter.class)
   private Duration minutesCount;
   @Column(name = "created_date")
   private LocalDateTime createdDate;

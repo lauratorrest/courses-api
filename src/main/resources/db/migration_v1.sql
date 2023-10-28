@@ -34,6 +34,7 @@ CREATE TABLE courses (
   requirements VARCHAR,
   description VARCHAR,
   course_is_for VARCHAR not NULL,
+  price DOUBLE NOT NULL,
     CONSTRAINT creator_id_fk FOREIGN KEY (creator_id) REFERENCES users(id)
 );
 

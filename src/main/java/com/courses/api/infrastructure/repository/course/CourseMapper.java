@@ -5,9 +5,8 @@ import java.util.List;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface CurseMapper {
+public interface CourseMapper {
   Course toEntity(CourseDto dto);
   List<Course> toEntity(List<CourseDto> dtos);
   CourseDto toDto(Course course);
-  List<CourseDto> toDto(List<Course> courses);
 }

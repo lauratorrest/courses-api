@@ -1,4 +1,4 @@
-package com.courses.api.infrastructure.api.controller.user;
+package com.courses.api.infrastructure.api.controller;
 
 import com.courses.api.application.user.UserGetApplication;
 import com.courses.api.application.user.UserSaveApplication;
