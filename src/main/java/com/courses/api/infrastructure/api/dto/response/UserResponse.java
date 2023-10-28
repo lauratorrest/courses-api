@@ -1,4 +1,4 @@
-package com.courses.api.infrastructure.api.dto;
+package com.courses.api.infrastructure.api.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

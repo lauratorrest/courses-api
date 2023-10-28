@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,8 @@ public class UserDto {
   private String profession;
   @Column(name = "about_me")
   private String aboutMe;
+  @Column(name = "created_date")
+  private LocalDateTime createdDate;
+  @Column(name = "updated_date")
+  private LocalDateTime updatedDate;
 }

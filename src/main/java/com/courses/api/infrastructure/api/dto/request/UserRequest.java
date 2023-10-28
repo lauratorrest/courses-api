@@ -1,6 +1,5 @@
-package com.courses.api.domain.entity;
+package com.courses.api.infrastructure.api.dto.request;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
-  private Long id;
+public class UserRequest {
   private String name;
   private String email;
   private String linkedInUrl;
@@ -19,6 +17,4 @@ public class User {
   private String profilePictureUrl;
   private String profession;
   private String aboutMe;
-  private LocalDateTime createdDate;
-  private LocalDateTime updatedDate;
 }
