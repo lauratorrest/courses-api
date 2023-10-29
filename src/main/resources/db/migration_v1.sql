@@ -27,7 +27,7 @@ CREATE TABLE courses (
   skills_to_learn text not NULL,
   sections_count INTEGER,
   classes_count INTEGER,
-  minutes_count INTERVAL,
+  minutes_count INTEGER,
   created_date TIMESTAMP not NULL,
   updated_date TIMESTAMP,
   certification BOOLEAN not NULL,
@@ -43,7 +43,7 @@ CREATE TABLE sections (
     course_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
     classes_count INTEGER,
-    minutes_count INTERVAL,
+    minutes_count INTEGER,
     CONSTRAINT course_id_fk FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE section_classes (
     id bigserial PRIMARY KEY,
     section_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
-    minutes_count interval not NULL,
+    minutes_count INTEGER not NULL,
     video_url VARCHAR(255) not NULL,
     CONSTRAINT section_id_fk FOREIGN KEY (section_id) REFERENCES sections(id)
 );

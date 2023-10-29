@@ -1,7 +1,7 @@
 package com.courses.api.infrastructure.api.dto.response;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class CourseBasicResponse {
   private Integer gradeCount;
   private Double price;
   private LocalDateTime updatedDate;
-  private Duration minutesCount;
+  private Integer minutesCount;
   private String subTitle;
-  private String skillsToLearn;
+  private List<String> skillsToLearnList;
 }

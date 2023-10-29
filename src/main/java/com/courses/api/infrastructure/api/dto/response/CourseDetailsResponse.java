@@ -1,8 +1,8 @@
 package com.courses.api.infrastructure.api.dto.response;
 
 import com.courses.api.domain.entity.LanguageEnum;
-import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,14 +22,14 @@ public class CourseDetailsResponse {
   private String creatorName;
   private LanguageEnum language;
   private Double price;
-  private String skillsToLearn;
+  private List<String> skillsToLearnList;
   private Integer sectionsCount;
   private Integer classesCount;
-  private Duration minutesCount;
+  private Integer minutesCount;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
   private Boolean certification;
-  private String requirements;
+  private List<String> requirementsList;
   private String description;
-  private String courseIsFor;
+  private List<String> courseIsForList;
 }

@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.Duration;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +29,5 @@ public class SectionDto {
   @Column(name = "classes_count")
   private Integer classesCount;
   @Column(name = "minutes_count")
-  private Duration minutesCount;
+  private Integer minutesCount;
 }

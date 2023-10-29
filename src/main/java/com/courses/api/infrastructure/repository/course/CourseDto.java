@@ -1,10 +1,8 @@
 package com.courses.api.infrastructure.repository.course;
 
 import com.courses.api.domain.entity.LanguageEnum;
-import com.courses.api.infrastructure.repository.assembler.DurationConverter;
 import com.courses.api.infrastructure.repository.user.UserDto;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,9 +50,8 @@ public class CourseDto {
   private Integer sectionsCount;
   @Column(name = "classes_count")
   private Integer classesCount;
-  @Column(name = "minutes_count",columnDefinition = "interval")
-  @Convert(converter = DurationConverter.class)
-  private Duration minutesCount;
+  @Column(name = "minutes_count")
+  private Integer minutesCount;
   @Column(name = "created_date")
   private LocalDateTime createdDate;
   @Column(name = "updated_date")
