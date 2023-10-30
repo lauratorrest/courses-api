@@ -25,9 +25,6 @@ CREATE TABLE courses (
   creator_id BIGINT,
   language VARCHAR(50) not NULL,
   skills_to_learn text not NULL,
-  sections_count INTEGER,
-  classes_count INTEGER,
-  minutes_count INTEGER,
   created_date TIMESTAMP not NULL,
   updated_date TIMESTAMP,
   certification BOOLEAN not NULL,
@@ -35,6 +32,7 @@ CREATE TABLE courses (
   description VARCHAR,
   course_is_for VARCHAR not NULL,
   price DOUBLE NOT NULL,
+  is_public DOUBLE NOT NULL,
     CONSTRAINT creator_id_fk FOREIGN KEY (creator_id) REFERENCES users(id)
 );
 
@@ -42,8 +40,6 @@ CREATE TABLE sections (
     id bigserial PRIMARY KEY,
     course_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
-    classes_count INTEGER,
-    minutes_count INTEGER,
     CONSTRAINT course_id_fk FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 

@@ -32,4 +32,5 @@ public class CourseDetailsResponse {
   private List<String> requirementsList;
   private String description;
   private List<String> courseIsForList;
+  private List<SectionResponse> sections;
 }

@@ -1,7 +1,6 @@
 package com.courses.api.infrastructure.repository.section;
 
 import com.courses.api.infrastructure.repository.course.CourseDto;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,8 +25,4 @@ public class SectionDto {
   @JoinColumn(name = "course_id")
   private CourseDto courseId;
   private String title;
-  @Column(name = "classes_count")
-  private Integer classesCount;
-  @Column(name = "minutes_count")
-  private Integer minutesCount;
 }

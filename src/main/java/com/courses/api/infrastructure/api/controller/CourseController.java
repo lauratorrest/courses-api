@@ -3,12 +3,18 @@ package com.courses.api.infrastructure.api.controller;
 import com.courses.api.application.course.CourseGetApplication;
 import com.courses.api.application.course.CourseSaveApplication;
 import com.courses.api.domain.entity.Course;
+import com.courses.api.domain.entity.Section;
+import com.courses.api.domain.entity.SectionClass;
 import com.courses.api.infrastructure.api.dto.request.CourseRequest;
+import com.courses.api.infrastructure.api.dto.request.SectionClassRequest;
+import com.courses.api.infrastructure.api.dto.request.SectionRequest;
 import com.courses.api.infrastructure.api.dto.response.CourseDetailsResponse;
 import com.courses.api.infrastructure.api.dto.response.CourseBasicResponse;
 import com.courses.api.infrastructure.api.mapper.course.CourseDetailsResponseMapper;
 import com.courses.api.infrastructure.api.mapper.course.CourseRequestMapper;
 import com.courses.api.infrastructure.api.mapper.course.CourseResponseMapper;
+import com.courses.api.infrastructure.api.mapper.section.SectionRequestMapper;
+import com.courses.api.infrastructure.api.mapper.sectionclass.SectionClassRequestMapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +37,8 @@ public class CourseController {
   private final CourseRequestMapper courseRequestMapper;
   private final CourseResponseMapper courseResponseMapper;
   private final CourseDetailsResponseMapper detailsResponseMapper;
+  private final SectionRequestMapper sectionRequestMapper;
+  private final SectionClassRequestMapper sectionClassRequestMapper;
 
   @GetMapping
   public ResponseEntity<List<CourseBasicResponse>> getAllCourses(){
@@ -63,7 +71,21 @@ public class CourseController {
 
   @PostMapping
   public ResponseEntity<String> saveCourse(@RequestBody CourseRequest request, @RequestHeader("USER_ID") Long id){
-    courseSaveApplication.saveCourse(courseRequestMapper.toEntity(request), id);
+    Course course = courseRequestMapper.toEntity(request);
+    List<Section> sections = new ArrayList<>();
+    List<SectionClass> classes = new ArrayList<>();
+
+    for(SectionRequest sectionRequest : request.getSections()){
+      Section section = sectionRequestMapper.toEntity(sectionRequest);
+      sections.add(section);
+
+      for (SectionClassRequest sectionClassRequest : sectionRequest.getSectionClasses()){
+        SectionClass sectionClass = sectionClassRequestMapper.toEntity(sectionClassRequest);
+        classes.add(sectionClass);
+      }
+    }
+
+    courseSaveApplication.saveCourse(course, sections, classes, id);
     return ResponseEntity.ok("¡El curso fue creado con éxito!");
   }
 

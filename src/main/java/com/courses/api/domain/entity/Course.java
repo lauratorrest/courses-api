@@ -21,13 +21,11 @@ public class Course {
   private LanguageEnum language;
   private Double price;
   private String skillsToLearn;
-  private Integer sectionsCount;
-  private Integer classesCount;
-  private Integer minutesCount;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
   private Boolean certification;
   private String requirements;
   private String description;
   private String courseIsFor;
+  private Boolean isPublic;
 }

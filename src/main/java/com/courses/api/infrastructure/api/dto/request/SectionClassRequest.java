@@ -1,4 +1,4 @@
-package com.courses.api.domain.entity;
+package com.courses.api.infrastructure.api.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Section {
-  private Long id;
-  private Course courseId;
+public class SectionClassRequest {
   private String title;
+  private String videoUrl;
+  private Integer minutesCount;
 }

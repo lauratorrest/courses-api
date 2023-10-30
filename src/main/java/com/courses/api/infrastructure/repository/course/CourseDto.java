@@ -46,12 +46,6 @@ public class CourseDto {
   private Double price;
   @Column(name = "skills_to_learn")
   private String skillsToLearn;
-  @Column(name = "sections_count")
-  private Integer sectionsCount;
-  @Column(name = "classes_count")
-  private Integer classesCount;
-  @Column(name = "minutes_count")
-  private Integer minutesCount;
   @Column(name = "created_date")
   private LocalDateTime createdDate;
   @Column(name = "updated_date")
@@ -61,4 +55,6 @@ public class CourseDto {
   private String description;
   @Column(name = "course_is_for")
   private String courseIsFor;
+  @Column(name = "is_public")
+  private Boolean isPublic;
 }

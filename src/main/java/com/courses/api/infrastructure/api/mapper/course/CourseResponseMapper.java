@@ -6,7 +6,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface CourseResponseMapper {
   @Mapping(target = "creatorName", source = "creator.name")
   CourseBasicResponse toResponse(Course course);

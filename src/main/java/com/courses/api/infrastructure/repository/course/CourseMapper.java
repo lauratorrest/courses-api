@@ -4,7 +4,7 @@ import com.courses.api.domain.entity.Course;
 import java.util.List;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface CourseMapper {
   Course toEntity(CourseDto dto);
   List<Course> toEntity(List<CourseDto> dtos);

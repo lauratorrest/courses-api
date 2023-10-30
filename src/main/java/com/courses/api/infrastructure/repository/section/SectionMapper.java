@@ -4,7 +4,7 @@ import com.courses.api.domain.entity.Section;
 import java.util.List;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface SectionMapper {
   Section toEntity(SectionDto dto);
   List<Section> toEntity(List<SectionDto> dtos);
