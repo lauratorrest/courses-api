@@ -18,3 +18,8 @@ spring:
     hibernate:
       format-sql: true
       ddl-auto: none
+
+braintree:
+   merchant-id: ${MERCHANT_ID}
+   public-key: ${PUBLIC_KEY}
+   private-key: ${PRIVATE_KEY}
