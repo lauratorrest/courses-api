@@ -8,9 +8,9 @@ spring:
 spring:
   profile: local
   datasource:
-    url: jdbc:postgresql://localhost:5432/courses_system
-    username: postgres
-    password: postgres
+    url: ${DATABASE_URL}
+    username: ${USER_NAME}
+    password: ${PASSWORD}
     test-on-borrow: true
     validation-query: SELECT 1 FROM dual
   jpa:

@@ -1,6 +1,7 @@
 package com.courses.api.application.section;
 
-import com.courses.api.domain.entity.SectionClass;
+import com.courses.api.domain.entity.Section;
+import com.courses.api.domain.service.section.SectionGetService;
 import com.courses.api.domain.service.sectionclass.SectionClassGetService;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -10,15 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SectionGetApplication {
   private final SectionClassGetService sectionClassGetService;
+  private final SectionGetService sectionGetService;
 
-  public int getSectionMinutesCount(Long sectionId){
-    List<SectionClass> classes = sectionClassGetService.getAllClassesBySectionId(sectionId);
-
-    int count = 0;
-
-    for (SectionClass sectionClass : classes){
-      count = count + sectionClass.getMinutesCount();
-    }
-    return count;
+  public List<Section> getAllSectionsByCourseId(Long courseId){
+    return sectionGetService.getAllByCourseId(courseId);
   }
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SectionClassResponse {
   private Long id;
+  private Long sectionId;
   private String title;
   private Integer minutesCount;
 }

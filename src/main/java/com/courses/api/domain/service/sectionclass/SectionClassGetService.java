@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface SectionClassGetService {
   List<SectionClass> getAllClassesBySectionId(Long sectionId);
+
 }

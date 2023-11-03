@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
   id bigserial PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(255) UNIQUE NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE users (
   updated_date TIMESTAMP
 );
 
-CREATE TABLE courses (
+CREATE TABLE IF NOT EXISTS courses (
   id bigserial PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   sub_title VARCHAR(255) not NULL,
@@ -36,18 +36,27 @@ CREATE TABLE courses (
     CONSTRAINT creator_id_fk FOREIGN KEY (creator_id) REFERENCES users(id)
 );
 
-CREATE TABLE sections (
+CREATE TABLE IF NOT EXISTS sections (
     id bigserial PRIMARY KEY,
     course_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
     CONSTRAINT course_id_fk FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
-CREATE TABLE section_classes (
+CREATE TABLE IF NOT EXISTS section_classes (
     id bigserial PRIMARY KEY,
     section_id BIGINT NOT NULL,
     title VARCHAR(255) NOT NULL,
     minutes_count INTEGER not NULL,
     video_url VARCHAR(255) not NULL,
     CONSTRAINT section_id_fk FOREIGN KEY (section_id) REFERENCES sections(id)
+);
+
+CREATE TABLE IF NOT EXISTS user_courses(
+   id bigserial PRIMARY KEY,
+   course_id BIGINT NOT NULL,
+   user_id BIGINT NOT NULL,
+   purchase_date timestamp NOT NULL,
+   CONSTRAINT course_id_fk FOREIGN KEY (course_id) REFERENCES courses(id),
+   CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES users(id)
 );
