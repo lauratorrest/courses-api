@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gestion_empleados
+    name: courses
   profiles:
     active: local
 
