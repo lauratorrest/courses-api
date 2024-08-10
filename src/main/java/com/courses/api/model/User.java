@@ -1,15 +1,19 @@
-package com.courses.api.domain.entity;
+package com.courses.api.model;
 
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
+@Document(collection = "users")
 public class User {
-  private Long id;
+
+  @Id
+  private String id;
   private String name;
   private String email;
   private String linkedInUrl;
@@ -21,4 +25,5 @@ public class User {
   private String aboutMe;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
+  private List<String> courseIds;
 }

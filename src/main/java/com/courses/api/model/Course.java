@@ -1,15 +1,20 @@
-package com.courses.api.domain.entity;
+package com.courses.api.model;
 
+import com.courses.api.model.enums.LanguageEnum;
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
+@Document(collection = "courses")
 public class Course {
-  private Long id;
+
+  @Id
+  private String id;
   private String title;
   private String subTitle;
   private String mainPictureUrl;
@@ -17,7 +22,7 @@ public class Course {
   private Double punctuation;
   private Integer gradeCount;
   private Integer studentsCount;
-  private User creator;
+  private String creatorId;
   private LanguageEnum language;
   private Double price;
   private String skillsToLearn;
@@ -28,4 +33,7 @@ public class Course {
   private String description;
   private String courseIsFor;
   private Boolean isPublic;
+  private List<String> sectionIds;
+  private Boolean ratedByCurrentUser;
+  private Double currentUserRate;
 }

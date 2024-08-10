@@ -6,20 +6,4 @@ spring:
 
 ---
 spring:
-  profile: local
   datasource:
-    url: ${DATABASE_URL}
-    username: ${USER_NAME}
-    password: ${PASSWORD}
-    test-on-borrow: true
-    validation-query: SELECT 1 FROM dual
-  jpa:
-    show-sql: true
-    hibernate:
-      format-sql: true
-      ddl-auto: none
-
-braintree:
-   merchant-id: ${MERCHANT_ID}
-   public-key: ${PUBLIC_KEY}
-   private-key: ${PRIVATE_KEY}
