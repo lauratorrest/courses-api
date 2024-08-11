@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: courses
-  profiles:
-    active: local
-
----
-spring:
-  datasource:
