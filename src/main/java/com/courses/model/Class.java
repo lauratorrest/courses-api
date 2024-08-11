@@ -1,4 +1,4 @@
-package com.courses.api.model;
+package com.courses.model;
 
 import jakarta.persistence.Id;
 import java.util.List;

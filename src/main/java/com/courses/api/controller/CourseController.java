@@ -1,7 +1,7 @@
 package com.courses.api.controller;
 
-import com.courses.api.model.Course;
-import com.courses.api.service.course.CourseService;
+import com.courses.model.Course;
+import com.courses.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ public class CourseController {
   private final CourseService courseService;
 
   @PostMapping
-  public void saveCourse(@RequestBody Course course){
+  public void saveCourse(@RequestBody Course course) {
     courseService.saveCourse(course);
   }
 }

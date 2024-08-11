@@ -1,6 +1,6 @@
-package com.courses.api.repository;
+package com.courses.repository;
 
-import com.courses.api.model.User;
+import com.courses.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<User, String> {

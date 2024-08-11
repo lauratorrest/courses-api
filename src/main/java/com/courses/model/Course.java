@@ -1,6 +1,6 @@
-package com.courses.api.model;
+package com.courses.model;
 
-import com.courses.api.model.enums.LanguageEnum;
+import com.courses.model.enums.LanguageEnum;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;

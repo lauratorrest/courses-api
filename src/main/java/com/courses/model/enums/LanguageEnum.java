@@ -1,4 +1,4 @@
-package com.courses.api.model.enums;
+package com.courses.model.enums;
 
 public enum LanguageEnum {
 

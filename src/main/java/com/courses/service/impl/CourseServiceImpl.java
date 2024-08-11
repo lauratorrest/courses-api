@@ -1,13 +1,14 @@
-package com.courses.api.service.course;
+package com.courses.service.impl;
 
-import com.courses.api.model.Course;
-import com.courses.api.repository.CourseRepository;
+import com.courses.model.Course;
+import com.courses.repository.CourseRepository;
+import com.courses.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class CourseService {
+public class CourseServiceImpl implements CourseService {
 
   private final CourseRepository courseRepository;
 
