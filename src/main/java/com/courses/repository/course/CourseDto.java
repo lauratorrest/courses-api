@@ -1,15 +1,19 @@
-package com.courses.model;
+package com.courses.repository.course;
 
 import com.courses.model.enums.LanguageEnum;
+import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
-public class Course {
+@Document("courses")
+public class CourseDto {
 
+  @Id
   private String id;
   private String title;
   private String subTitle;

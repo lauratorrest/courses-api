@@ -1,4 +1,4 @@
-package com.courses.api.dto;
+package com.courses.api.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
