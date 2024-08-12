@@ -1,6 +1,6 @@
 package com.courses.api.controller;
 
-import com.courses.api.dto.request.UserCreateRequest;
+import com.courses.api.dto.request.UserRequest;
 import com.courses.api.dto.response.UserLoginResponse;
 import com.courses.api.mapper.request.UserRequestMapper;
 import com.courses.api.mapper.response.UserResponseMapper;
@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +27,21 @@ public class UserController {
 
   @Operation(summary = "Create a new user")
   @PostMapping("/register")
-  public void saveUser(@Valid @RequestBody UserCreateRequest userCreateRequest) {
-    userService.saveNewUser(UserRequestMapper.INSTANCE.toModel(userCreateRequest));
+  public void saveUser(@Valid @RequestBody UserRequest userRequest) {
+    userService.saveNewUser(UserRequestMapper.INSTANCE.toModel(userRequest));
   }
 
   @Operation(summary = "Login with user credentials")
   @PostMapping(value = "/login")
-  public ResponseEntity<UserLoginResponse> userLogin(@RequestParam("email") String email, @RequestParam("password") String password){
-    return ResponseEntity.ok(UserResponseMapper.INSTANCE.toResponse(userService.authenticateUser(email, password)));
+  public ResponseEntity<UserLoginResponse> userLogin(@RequestParam("email") String email,
+      @RequestParam("password") String password) {
+    return ResponseEntity.ok(
+        UserResponseMapper.INSTANCE.toResponse(userService.authenticateUser(email, password)));
+  }
+
+  @Operation(summary = "Update existing user information")
+  @PutMapping("/update-info")
+  public void updateUserData(@RequestBody @Valid UserRequest userRequest) {
+    userService.updateUserData(UserRequestMapper.INSTANCE.toModel(userRequest));
   }
 }

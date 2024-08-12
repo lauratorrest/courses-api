@@ -13,6 +13,7 @@ public class User {
   private String name;
   private String email;
   private String password;
+  private String webPageUrl;
   private String linkedInUrl;
   private String youtubeChannelUrl;
   private String facebookUrl;
@@ -25,5 +26,4 @@ public class User {
   private List<Course> madeCourses;
   private List<Course> boughtCourses;
   private List<String> cartCourses; //TODO: Cart CRUD
-  private Boolean deleted;
 }

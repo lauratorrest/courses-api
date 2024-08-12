@@ -6,9 +6,11 @@ import com.courses.repository.user.UserMapper;
 import com.courses.repository.user.UserRepository;
 import com.courses.service.UserService;
 import com.courses.service.exception.NoUserWithGivenEmailException;
+import com.courses.service.exception.UserDoesNotExistException;
 import com.courses.service.exception.WrongPasswordException;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.StringFixProcesses;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -31,8 +33,8 @@ public class UserServiceImpl implements UserService {
     user.setName(stringFixProcesses.removeSpaces(user.getName()));
     user.setProfession(stringFixProcesses.removeSpaces(user.getProfession()));
     user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setCreatedDate(LocalDateTime.now());
     UserDto userDto = UserMapper.INSTANCE.toDto(user);
-    userDto.onCreate();
     userRepository.save(userDto);
   }
 
@@ -40,19 +42,50 @@ public class UserServiceImpl implements UserService {
   public User authenticateUser(String email, String password) {
     Optional<UserDto> userDto = userRepository.findByEmail(email);
 
-    if(userDto.isPresent()){
-      if(passwordEncoder.matches(password, userDto.get().getPassword())){
+    if (userDto.isPresent()) {
+      if (passwordEncoder.matches(password, userDto.get().getPassword())) {
         return UserMapper.INSTANCE.toEntity(userDto.get());
-      }else{
+      } else {
         throw new WrongPasswordException(
             messageSource.getMessage(ExceptionCode.WRONG_PASSWORD.getType(), null,
                 LocaleContextHolder.getLocale())
         );
       }
 
-    }else {
+    } else {
       throw new NoUserWithGivenEmailException(
-          messageSource.getMessage(ExceptionCode.USER_WITH_EMAIL_NOT_FOUND.getType(), new Object[] {email}, LocaleContextHolder.getLocale())
+          messageSource.getMessage(ExceptionCode.USER_WITH_EMAIL_NOT_FOUND.getType(),
+              new Object[]{email}, LocaleContextHolder.getLocale())
+      );
+    }
+  }
+
+  @Override
+  public void updateUserData(User user) {
+    User currentUser = userExistsValidation(user.getId());
+
+    currentUser.setName(user.getName());
+    currentUser.setEmail(user.getEmail());
+    currentUser.setWebPageUrl(user.getWebPageUrl());
+    currentUser.setLinkedInUrl(user.getLinkedInUrl());
+    currentUser.setYoutubeChannelUrl(user.getYoutubeChannelUrl());
+    currentUser.setFacebookUrl(user.getFacebookUrl());
+    currentUser.setInstagramUrl(user.getInstagramUrl());
+    currentUser.setProfilePictureUrl(user.getProfilePictureUrl());
+    currentUser.setProfession(user.getProfession());
+    currentUser.setAboutMe(user.getAboutMe());
+    currentUser.setUpdatedDate(LocalDateTime.now());
+
+    userRepository.save(UserMapper.INSTANCE.toDto(currentUser));
+  }
+
+  private User userExistsValidation(String id){
+    Optional<UserDto> userDto = userRepository.findById(id);
+    if(userDto.isPresent()){
+      return UserMapper.INSTANCE.toEntity(userDto.get());
+    }else {
+      throw new UserDoesNotExistException(
+          messageSource.getMessage(ExceptionCode.USER_NOT_FOUND.getType(), null, LocaleContextHolder.getLocale())
       );
     }
   }

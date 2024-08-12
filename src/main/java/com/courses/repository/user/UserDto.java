@@ -20,6 +20,7 @@ public class UserDto {
   @Indexed(unique = true)
   private String email;
   private String password;
+  private String webPageUrl;
   private String linkedInUrl;
   private String youtubeChannelUrl;
   private String facebookUrl;
@@ -32,10 +33,4 @@ public class UserDto {
   private List<CourseDto> madeCourses;
   private List<CourseDto> boughtCourses;
   private List<String> cartCourses;
-  private Boolean deleted;
-
-  public void onCreate(){
-    this.createdDate = LocalDateTime.now();
-    this.deleted = Boolean.FALSE;
-  }
 }

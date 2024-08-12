@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class BaseExceptionHandler {
 
   @ExceptionHandler(BaseException.class)
-  public ResponseEntity<ErrorResponse> errorHandler(BaseException baseException){
+  public ResponseEntity<ErrorResponse> errorHandler(BaseException baseException) {
     return new ResponseEntity<>(ErrorResponse.builder()
         .status(baseException.getStatus())
         .code(baseException.getCode())
