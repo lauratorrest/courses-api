@@ -3,11 +3,13 @@ package com.courses.model;
 import com.courses.model.enums.LanguageEnum;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class Course {
 
   private String id;
@@ -18,18 +20,18 @@ public class Course {
   private Double punctuation;
   private Integer gradeCount;
   private Integer studentsCount;
-  private String creatorId;
   private LanguageEnum language;
+  private String category;
   private Double price;
-  private String skillsToLearn;
+  private List<String> skillsToLearn;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
   private Boolean certification;
-  private String requirements;
+  private List<String> requirements;
   private String description;
-  private String courseIsFor;
+  private List<String> courseIsFor;
   private Boolean isPublic;
-  private List<String> sectionIds;
+  private List<Section> sections;
   private Boolean ratedByCurrentUser;
   private Double currentUserRate;
 }

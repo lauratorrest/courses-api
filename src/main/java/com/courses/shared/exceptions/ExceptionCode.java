@@ -9,7 +9,8 @@ public enum ExceptionCode {
   WRONG_PASSWORD("ERR-002", "Exception.WRONG_PASSWORD"),
   USER_NOT_FOUND("ERR-003", "Exception.USER_NOT_FOUND"),
   FILE_TYPE_NOT_ALLOWED("ERR-004", "Exception.FILE_TYPE_NOT_ALLOWED"),
-  FILE_EXCEEDS_ALLOWED_SIZE("ERR-005", "Exception.FILE_EXCEEDS_ALLOWED_SIZE");
+  FILE_EXCEEDS_ALLOWED_SIZE("ERR-005", "Exception.FILE_EXCEEDS_ALLOWED_SIZE"),
+  COURSE_NOT_FOUND("ERR-006", "Exception.COURSE_NOT_FOUND");
 
   private final String code;
   private final String type;

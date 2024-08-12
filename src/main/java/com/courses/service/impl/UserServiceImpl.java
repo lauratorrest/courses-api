@@ -6,16 +6,14 @@ import com.courses.repository.user.UserMapper;
 import com.courses.repository.user.UserRepository;
 import com.courses.service.CloudinaryService;
 import com.courses.service.UserService;
-import com.courses.service.exception.FileTypeNotAllowedException;
 import com.courses.service.exception.NoUserWithGivenEmailException;
-import com.courses.service.exception.TooBigFileException;
 import com.courses.service.exception.UserDoesNotExistException;
 import com.courses.service.exception.WrongPasswordException;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 import com.courses.shared.utils.StringFixProcesses;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -34,8 +32,6 @@ public class UserServiceImpl implements UserService {
   private final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
   private final MessageSource messageSource;
   private final CloudinaryService cloudinaryService;
-
-  private static final long MAX_SIZE = 5 * 1024 * 1024;
 
   @Override
   public void saveNewUser(User user) {
@@ -70,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void updateUserData(User user) {
-    User currentUser = userExistsValidation(user.getId());
+    UserDto currentUser = userExistsValidation(user.getId());
 
     currentUser.setName(user.getName());
     currentUser.setEmail(user.getEmail());
@@ -84,12 +80,12 @@ public class UserServiceImpl implements UserService {
     currentUser.setAboutMe(user.getAboutMe());
     currentUser.setUpdatedDate(LocalDateTime.now());
 
-    userRepository.save(UserMapper.INSTANCE.toDto(currentUser));
+    userRepository.save(currentUser);
   }
 
   @Override
   public void setUserProfilePicture(MultipartFile picture, String userId) {
-    User user = userExistsValidation(userId);
+    UserDto user = userExistsValidation(userId);
 
     if (picture == null || picture.isEmpty()) {
       if (user.getProfilePictureUrl() != null) {
@@ -98,31 +94,31 @@ public class UserServiceImpl implements UserService {
 
       user.setProfilePictureUrl(null);
     } else {
-      if (!Constants.FILE_TYPE_FOR_PICS_ALLOWED.matcher(
-          Objects.requireNonNull(picture.getOriginalFilename())).matches()) {
-        throw new FileTypeNotAllowedException(messageSource.getMessage(
-            ExceptionCode.FILE_TYPE_NOT_ALLOWED.getType(), null, LocaleContextHolder.getLocale()
-        ));
-      }
-
-      if (picture.getSize() > MAX_SIZE) {
-        throw new TooBigFileException(
-            this.messageSource.getMessage(ExceptionCode.FILE_EXCEEDS_ALLOWED_SIZE.getType(),
-                new Object[]{MAX_SIZE / 1024}, LocaleContextHolder.getLocale()));
-      }
-
-      String pictureUrl = cloudinaryService.uploadFile(picture, "profile-pics");
+      String pictureUrl = cloudinaryService.uploadFile(picture, "profile-pics",
+          Constants.FILE_TYPE_FOR_PICS_ALLOWED, Constants.PICS_MAX_SIZE);
       user.setProfilePictureUrl(pictureUrl);
       user.setUpdatedDate(LocalDateTime.now());
     }
 
-    userRepository.save(UserMapper.INSTANCE.toDto(user));
+    userRepository.save(user);
   }
 
-  private User userExistsValidation(String id) {
+  @Override
+  public void addUserNewCourse(String userId, String courseId) {
+    UserDto user = userExistsValidation(userId);
+
+    if (user.getMadeCoursesIds() == null) {
+      user.setMadeCoursesIds(new ArrayList<>());
+    }
+
+    user.getMadeCoursesIds().add(courseId);
+    userRepository.save(user);
+  }
+
+  private UserDto userExistsValidation(String id) {
     Optional<UserDto> userDto = userRepository.findById(id);
     if (userDto.isPresent()) {
-      return UserMapper.INSTANCE.toEntity(userDto.get());
+      return userDto.get();
     } else {
       throw new UserDoesNotExistException(
           messageSource.getMessage(ExceptionCode.USER_NOT_FOUND.getType(), null,

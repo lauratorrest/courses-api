@@ -4,12 +4,14 @@ import com.courses.model.enums.LanguageEnum;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
+@Builder
 @Document("courses")
 public class CourseDto {
 
@@ -22,16 +24,16 @@ public class CourseDto {
   private Double punctuation;
   private Integer gradeCount;
   private Integer studentsCount;
-  private String creatorId;
   private LanguageEnum language;
+  private String category;
   private Double price;
-  private String skillsToLearn;
+  private List<String> skillsToLearn;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
   private Boolean certification;
-  private String requirements;
+  private List<String> requirements;
   private String description;
-  private String courseIsFor;
+  private List<String> courseIsFor;
   private Boolean isPublic;
   private List<String> sectionIds;
   private Boolean ratedByCurrentUser;

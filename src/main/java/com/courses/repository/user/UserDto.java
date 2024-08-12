@@ -1,6 +1,5 @@
 package com.courses.repository.user;
 
-import com.courses.repository.course.CourseDto;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,7 +29,7 @@ public class UserDto {
   private String aboutMe;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
-  private List<CourseDto> madeCourses;
-  private List<CourseDto> boughtCourses;
+  private List<String> madeCoursesIds;
+  private List<String> boughtCoursesIds;
   private List<String> cartCourses;
 }

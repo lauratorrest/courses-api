@@ -12,4 +12,6 @@ public interface UserService {
   void updateUserData(User model);
 
   void setUserProfilePicture(MultipartFile picture, String userId);
+
+  void addUserNewCourse(String userId, String courseId);
 }
