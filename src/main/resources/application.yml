@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+  messages:
+    basename: i18n/messages, i18n/messages_es
+  servlet:
+    multipart:
+      max-file-size: 5TB
+      max-request-size: 5TB
+
+cloudinary:
+  cloud_name: ${CLOUDINARY_CLOUDNAME}
+  api_key: ${CLOUDINARY_APIKEY}
+  api_secret_key: ${CLOUDINARY_SECRETKEY}

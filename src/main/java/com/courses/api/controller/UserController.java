@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Tag(name = "Users API", description = "End-points for users information management")
@@ -43,5 +45,12 @@ public class UserController {
   @PutMapping("/update-info")
   public void updateUserData(@RequestBody @Valid UserRequest userRequest) {
     userService.updateUserData(UserRequestMapper.INSTANCE.toModel(userRequest));
+  }
+
+  @Operation(summary = "Set user profile picture")
+  @PostMapping(value = "/profile-pic", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+  public void setProfilePicture(@RequestBody(required = false) MultipartFile picture,
+      @RequestParam("userId") String userId) {
+    userService.setUserProfilePicture(picture, userId);
   }
 }
