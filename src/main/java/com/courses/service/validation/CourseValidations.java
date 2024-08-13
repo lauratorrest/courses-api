@@ -1,7 +1,8 @@
 package com.courses.service.validation;
 
+import com.courses.model.Class;
 import com.courses.model.Course;
-import com.courses.repository.course.CourseDto;
+import com.courses.model.Section;
 import com.courses.service.exception.course.CourseMainPictureNeededException;
 import com.courses.service.exception.course.CourseWithNoClassException;
 import com.courses.service.exception.course.CourseWithUncompletedDataException;
@@ -19,7 +20,7 @@ public class CourseValidations {
 
   private final MessageSource messageSource;
 
-  public void validateCompleteInfo(CourseDto currentCourse) {
+  public void validateCompleteInfo(Course currentCourse) {
     if (currentCourse.getMainPictureUrl() == null) {
       throw new CourseMainPictureNeededException(messageSource.getMessage(
           ExceptionCode.MAIN_PIC_NEEDED.getType(), null, LocaleContextHolder.getLocale()
@@ -40,15 +41,19 @@ public class CourseValidations {
     }
   }
 
-  public void validateAtLeastOneClass(Course course) {
-    if (course.getSections() == null || course.getSections().isEmpty()) {
+  public void validateAtLeastOneActiveSectionAndClass(Course course) {
+    if (isNullOrEmpty(course.getSections())) {
       throwNoClassException();
     }
 
-    course.getSections().stream()
-        .filter(section -> section.getClasses() == null || section.getClasses().isEmpty())
-        .findAny()
-        .ifPresent(section -> throwNoClassException());
+    boolean hasActiveSectionWithActiveClass = course.getSections().stream()
+        .filter(Section::getIsActive)
+        .anyMatch(section -> !isNullOrEmpty(section.getClasses()) &&
+            section.getClasses().stream().anyMatch(Class::getIsActive));
+
+    if (!hasActiveSectionWithActiveClass) {
+      throwNoClassException();
+    }
   }
 
   private void throwNoClassException() {
@@ -57,7 +62,7 @@ public class CourseValidations {
     ));
   }
 
-  private boolean isNullOrEmpty(List<String> list) {
+  private boolean isNullOrEmpty(List<?> list) {
     return list == null || list.isEmpty();
   }
 }

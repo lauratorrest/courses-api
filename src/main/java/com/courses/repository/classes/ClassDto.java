@@ -2,6 +2,7 @@ package com.courses.repository.classes;
 
 import com.courses.repository.class_material.ClassMaterialDto;
 import jakarta.persistence.Id;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,4 +21,7 @@ public class ClassDto {
   private Boolean watchedByCurrentUser;
   private ClassMaterialDto classMaterial;
   private List<String> questionsIds;
+  private LocalDateTime createdDate;
+  private LocalDateTime updatedDate;
+  private Boolean isActive;
 }

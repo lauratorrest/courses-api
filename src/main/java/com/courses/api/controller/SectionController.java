@@ -1,9 +1,9 @@
 package com.courses.api.controller;
 
-import com.courses.api.dto.request.SectionRequest;
-import com.courses.api.dto.response.SectionResponse;
-import com.courses.api.mapper.request.SectionRequestMapper;
-import com.courses.api.mapper.response.SectionResponseMapper;
+import com.courses.api.dto.request.ClassBasicRequest;
+import com.courses.api.dto.response.ClassBasicResponse;
+import com.courses.api.mapper.request.ClassRequestMapper;
+import com.courses.api.mapper.response.ClassResponseMapper;
 import com.courses.service.SectionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,20 +25,20 @@ public class SectionController {
 
   private final SectionService sectionService;
 
-  @Operation(summary = "Create new section")
-  @PostMapping("/create/{courseId}")
-  public ResponseEntity<SectionResponse> createNewSection(
-      @RequestBody @Valid SectionRequest sectionRequest,
-      @PathVariable("courseId") String courseId) {
-    return ResponseEntity.ok(SectionResponseMapper.INSTANCE.toResponse(
-        sectionService.saveNewSection(SectionRequestMapper.INSTANCE.toEntity(sectionRequest),
-            courseId)));
-  }
-
   @Operation(summary = "Delete section")
   @DeleteMapping("/delete/{sectionId}/{courseId}")
   public void deleteSection(@PathVariable("sectionId") String sectionId,
       @PathVariable("courseId") String courseId) {
     sectionService.deleteSection(sectionId, courseId);
+  }
+
+  @Operation(summary = "Create a new class")
+  @PostMapping("/{sectionId}/add-class")
+  public ResponseEntity<ClassBasicResponse> createClass(
+      @RequestBody @Valid ClassBasicRequest classBasicRequest,
+      @PathVariable("sectionId") String sectionId) {
+    return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
+        sectionService.addNewClassToSection(ClassRequestMapper.INSTANCE.toEntity(classBasicRequest),
+            sectionId)));
   }
 }

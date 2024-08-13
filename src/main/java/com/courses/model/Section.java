@@ -16,4 +16,5 @@ public class Section {
   private List<Class> classes;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
+  private Boolean isActive;
 }

@@ -1,6 +1,7 @@
 package com.courses.service;
 
 import com.courses.model.Course;
+import com.courses.model.Section;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CourseService {
@@ -15,7 +16,7 @@ public interface CourseService {
 
   void changeCoursePrivacyStatus(String courseId);
 
-  void addCourseSection(String sectionId, String courseId);
+  Course findCourseDataById(String courseId);
 
-  void deleteSectionFromCourse(String sectionId, String courseId);
+  Section saveCourseNewSection(Section entity, String courseId);
 }

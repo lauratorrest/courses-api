@@ -1,17 +1,8 @@
 package com.courses.api.controller;
 
-import com.courses.api.dto.request.ClassBasicRequest;
-import com.courses.api.dto.response.ClassBasicResponse;
-import com.courses.api.mapper.request.ClassRequestMapper;
-import com.courses.api.mapper.response.ClassResponseMapper;
 import com.courses.service.ClassService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,11 +14,10 @@ public class ClassController {
 
   private final ClassService classService;
 
-  @Operation(summary = "Create a new class")
-  @PostMapping("/create")
-  public ResponseEntity<ClassBasicResponse> createClass(
-      @RequestBody @Valid ClassBasicRequest classBasicRequest) {
-    return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
-        classService.saveClass(ClassRequestMapper.INSTANCE.toEntity(classBasicRequest))));
-  }
+  //@Operation(summary = "Add video to class")
+  //@PostMapping(value = "/{classId}/add-video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  //public ResponseEntity<ClassBasicResponse> addClassVideo(@RequestBody MultipartFile video, @PathVariable("classId") String classId){
+  //  return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
+  //      classService.addClassVideo(video, classId)));
+  //}
 }

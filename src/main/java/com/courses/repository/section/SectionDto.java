@@ -18,4 +18,5 @@ public class SectionDto {
   private List<String> classesIds;
   private LocalDateTime createdDate;
   private LocalDateTime updatedDate;
+  private Boolean isActive;
 }

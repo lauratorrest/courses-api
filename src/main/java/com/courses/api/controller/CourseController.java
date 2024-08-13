@@ -2,9 +2,13 @@ package com.courses.api.controller;
 
 import com.courses.api.dto.request.CourseDetailedRequest;
 import com.courses.api.dto.request.CourseRequest;
+import com.courses.api.dto.request.SectionRequest;
 import com.courses.api.dto.response.CourseBasicResponse;
+import com.courses.api.dto.response.SectionResponse;
 import com.courses.api.mapper.request.CourseRequestMapper;
+import com.courses.api.mapper.request.SectionRequestMapper;
 import com.courses.api.mapper.response.CourseResponseMapper;
+import com.courses.api.mapper.response.SectionResponseMapper;
 import com.courses.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -66,6 +70,16 @@ public class CourseController {
   @PutMapping("/change-privacy-status/{courseId}")
   public void changeCoursePrivacyStatus(@PathVariable("courseId") String courseId) {
     courseService.changeCoursePrivacyStatus(courseId);
+  }
+
+  @Operation(summary = "Create new section for course")
+  @PostMapping("/{courseId}/add-section")
+  public ResponseEntity<SectionResponse> createNewSectionForCourse(
+      @RequestBody @Valid SectionRequest sectionRequest,
+      @PathVariable("courseId") String courseId) {
+    return ResponseEntity.ok(SectionResponseMapper.INSTANCE.toResponse(
+        courseService.saveCourseNewSection(SectionRequestMapper.INSTANCE.toEntity(sectionRequest),
+            courseId)));
   }
 
   //TODO: Save All for testing

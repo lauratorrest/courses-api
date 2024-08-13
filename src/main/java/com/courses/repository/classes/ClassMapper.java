@@ -15,7 +15,9 @@ public interface ClassMapper {
   ClassMapper INSTANCE = Mappers.getMapper(ClassMapper.class);
 
   @Mapping(source = "questionsIds", target = "questions", qualifiedByName = "mapQuestions")
-  Class toEntity(ClassDto save);
+  Class toEntity(ClassDto classDto);
+
+  List<Class> toEntity(List<ClassDto> classDtos);
 
   @Mapping(source = "questions", target = "questionsIds", qualifiedByName = "mapQuestionsIds")
   ClassDto toDto(Class classModel);

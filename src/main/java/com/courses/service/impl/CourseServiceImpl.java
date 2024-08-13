@@ -1,11 +1,13 @@
 package com.courses.service.impl;
 
 import com.courses.model.Course;
+import com.courses.model.Section;
 import com.courses.repository.course.CourseDto;
 import com.courses.repository.course.CourseMapper;
 import com.courses.repository.course.CourseRepository;
 import com.courses.service.CloudinaryService;
 import com.courses.service.CourseService;
+import com.courses.service.SectionService;
 import com.courses.service.UserService;
 import com.courses.service.exception.course.CourseDoesNotExistException;
 import com.courses.service.validation.CourseValidations;
@@ -13,8 +15,8 @@ import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 import com.courses.shared.utils.StringFixProcesses;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -31,6 +33,7 @@ public class CourseServiceImpl implements CourseService {
   private final CloudinaryService cloudinaryService;
   private final MessageSource messageSource;
   private final CourseValidations courseValidations;
+  private final SectionService sectionService;
 
   public Course saveCourse(Course course, String userId) {
     course.setTitle(stringFixProcesses.removeSpaces(course.getTitle()));
@@ -93,34 +96,35 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public void changeCoursePrivacyStatus(String courseId) {
-    CourseDto currentCourse = validateCourseDoesExists(courseId);
+    Course currentCourse = findCourseDataById(courseId);
 
     if (currentCourse.getIsPublic() == Boolean.TRUE) {
       currentCourse.setIsPublic(Boolean.FALSE);
     } else {
       courseValidations.validateCompleteInfo(currentCourse);
-      courseValidations.validateAtLeastOneClass(CourseMapper.INSTANCE.toEntity(currentCourse));
+      courseValidations.validateAtLeastOneActiveSectionAndClass(currentCourse);
       currentCourse.setIsPublic(Boolean.TRUE);
     }
 
+    courseRepository.save(CourseMapper.INSTANCE.toDto(currentCourse));
+  }
+
+  @Override
+  public Course findCourseDataById(String courseId) {
+    Course course = CourseMapper.INSTANCE.toEntity(validateCourseDoesExists(courseId));
+    course.setSections(
+        sectionService.findSectionsByIds(course.getSections().stream().map(Section::getId).collect(
+            Collectors.toList())));
+    return course;
+  }
+
+  @Override
+  public Section saveCourseNewSection(Section section, String courseId) {
+    CourseDto currentCourse = validateCourseDoesExists(courseId);
+    Section savedSection = sectionService.saveNewSection(section);
+    currentCourse.getSectionIds().add(savedSection.getId());
     courseRepository.save(currentCourse);
-  }
-
-  @Override
-  public void addCourseSection(String sectionId, String courseId) {
-    CourseDto courseDto = validateCourseDoesExists(courseId);
-    if (courseDto.getSectionIds() == null) {
-      courseDto.setSectionIds(new ArrayList<>());
-    }
-    courseDto.getSectionIds().add(sectionId);
-    courseRepository.save(courseDto);
-  }
-
-  @Override
-  public void deleteSectionFromCourse(String sectionId, String courseId) {
-    CourseDto courseDto = validateCourseDoesExists(courseId);
-    courseDto.getSectionIds().remove(sectionId);
-    courseRepository.save(courseDto);
+    return savedSection;
   }
 
   private CourseDto validateCourseDoesExists(String courseId) {
