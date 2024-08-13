@@ -51,7 +51,7 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public void updateCourseDetails(Course course) {
-    CourseDto currentCourse = validateCourseDoesExists(course.getId());
+    CourseDto currentCourse = this.validateCourseDoesExists(course.getId());
 
     currentCourse.setTitle(stringFixProcesses.removeSpaces(course.getTitle()));
     currentCourse.setSubTitle(stringFixProcesses.removeSpaces(course.getSubTitle()));
@@ -69,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public void setCourseMainPicture(MultipartFile mainPicture, String courseId) {
-    CourseDto currentCourse = validateCourseDoesExists(courseId);
+    CourseDto currentCourse = this.validateCourseDoesExists(courseId);
 
     if (mainPicture == null) {
       currentCourse.setMainPictureUrl(null);
@@ -84,7 +84,7 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public void setCoursePresentationVideo(MultipartFile presentationVideo, String courseId) {
-    CourseDto currentCourse = validateCourseDoesExists(courseId);
+    CourseDto currentCourse = this.validateCourseDoesExists(courseId);
 
     if (presentationVideo == null || presentationVideo.isEmpty()) {
       currentCourse.setPresentationVideoUrl(null);
@@ -99,7 +99,7 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public void changeCoursePrivacyStatus(String courseId) {
-    Course currentCourse = findCourseDataById(courseId);
+    Course currentCourse = this.findCourseDataById(courseId);
 
     if (currentCourse.getIsPublic() == Boolean.TRUE) {
       currentCourse.setIsPublic(Boolean.FALSE);
@@ -114,7 +114,7 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public Course findCourseDataById(String courseId) {
-    Course course = CourseMapper.INSTANCE.toEntity(validateCourseDoesExists(courseId));
+    Course course = CourseMapper.INSTANCE.toEntity(this.validateCourseDoesExists(courseId));
     User creator = userService.getUserById(course.getCreator().getId());
     course.setCreator(creator);
     course.setSections(
@@ -125,7 +125,7 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public Section saveCourseNewSection(Section section, String courseId) {
-    CourseDto currentCourse = validateCourseDoesExists(courseId);
+    CourseDto currentCourse = this.validateCourseDoesExists(courseId);
     Section savedSection = sectionService.saveNewSection(section);
     currentCourse.getSectionIds().add(savedSection.getId());
     courseRepository.save(currentCourse);

@@ -39,14 +39,14 @@ public interface CourseMapper {
   }
 
   @Named("mapCreator")
-  default User mapCreator(String userId){
+  default User mapCreator(String userId) {
     return userId != null
         ? User.builder().id(userId).build()
         : null;
   }
 
   @Named("mapCreatorId")
-  default String mapCreatorId(User user){
+  default String mapCreatorId(User user) {
     return user != null
         ? user.getId()
         : null;

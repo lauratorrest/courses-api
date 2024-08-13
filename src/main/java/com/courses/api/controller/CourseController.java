@@ -89,7 +89,9 @@ public class CourseController {
 
   @Operation(summary = "Get course whole information")
   @GetMapping("/{courseId}")
-  public ResponseEntity<CourseDetailedResponse> getCourseById(@PathVariable("courseId") String courseId){
-    return ResponseEntity.ok(CourseResponseMapper.INSTANCE.toDetailedResponse(courseService.findCourseDataById(courseId)));
+  public ResponseEntity<CourseDetailedResponse> getCourseById(
+      @PathVariable("courseId") String courseId) {
+    return ResponseEntity.ok(CourseResponseMapper.INSTANCE.toDetailedResponse(
+        courseService.findCourseDataById(courseId)));
   }
 }

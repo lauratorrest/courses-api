@@ -8,9 +8,11 @@ public interface SectionService {
 
   Section saveNewSection(Section section);
 
-  void deleteSection(String sectionId, String courseId);
+  void deleteSection(String sectionId);
 
   List<Section> findSectionsByIds(List<String> ids);
 
   Class addNewClassToSection(Class entity, String sectionId);
+
+  void changeSectionStatus(String sectionId);
 }

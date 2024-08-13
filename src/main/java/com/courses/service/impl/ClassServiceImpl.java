@@ -7,6 +7,7 @@ import com.courses.repository.classes.ClassRepository;
 import com.courses.service.ClassService;
 import com.courses.service.CloudinaryService;
 import com.courses.service.exception.classes.ClassDoesNotExistException;
+import com.courses.service.exception.classes.ClassWithNoVideoException;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class ClassServiceImpl implements ClassService {
   @Override
   public Class saveClass(Class classModel) {
     classModel.setCreatedDate(LocalDateTime.now());
-    classModel.setIsActive(Boolean.TRUE);
+    classModel.setIsActive(Boolean.FALSE);
     return ClassMapper.INSTANCE.toEntity(
         classRepository.save(ClassMapper.INSTANCE.toDto(classModel)));
   }
@@ -42,13 +43,14 @@ public class ClassServiceImpl implements ClassService {
 
   @Override
   public Class addClassVideo(MultipartFile video, String classId) {
-    ClassDto currentClass = validateClassExist(classId);
+    ClassDto currentClass = this.validateClassExist(classId);
     String videoUrl = null;
 
-    if(currentClass.getVideoUrl() != null && video == null){
+    if (currentClass.getVideoUrl() != null && video == null) {
       currentClass.setUpdatedDate(LocalDateTime.now());
     } else if (video != null) {
-      videoUrl = cloudinaryService.uploadFile(video, FOLDER_NAME, Constants.FILE_TYPE_FOR_VIDEOS_ALLOWED, Constants.VIDS_MAX_SIZE);
+      videoUrl = cloudinaryService.uploadFile(video, FOLDER_NAME,
+          Constants.FILE_TYPE_FOR_VIDEOS_ALLOWED, Constants.VIDS_MAX_SIZE);
       currentClass.setUpdatedDate(LocalDateTime.now());
     }
 
@@ -58,13 +60,31 @@ public class ClassServiceImpl implements ClassService {
 
   @Override
   public void changeClassStatus(String classId) {
+    ClassDto currentClass = this.validateClassExist(classId);
 
+    if (currentClass.getIsActive() == Boolean.TRUE) {
+      currentClass.setIsActive(Boolean.FALSE);
+    } else {
+      if (currentClass.getVideoUrl() == null) {
+        throw new ClassWithNoVideoException(messageSource.getMessage(
+            ExceptionCode.CLASS_VIDEO_NEEDED.getType(), null, LocaleContextHolder.getLocale()
+        ));
+      }
+      currentClass.setIsActive(Boolean.TRUE);
+    }
+
+    classRepository.save(currentClass);
   }
 
-  private ClassDto validateClassExist(String id){
+  @Override
+  public void deleteByIds(List<String> classesIds) {
+    classRepository.deleteAllById(classesIds);
+  }
+
+  private ClassDto validateClassExist(String id) {
     Optional<ClassDto> classDto = classRepository.findById(id);
 
-    if(classDto.isEmpty()){
+    if (classDto.isEmpty()) {
       throw new ClassDoesNotExistException(messageSource.getMessage(
           ExceptionCode.CLASS_NOT_FOUND.getType(), null, LocaleContextHolder.getLocale()
       ));

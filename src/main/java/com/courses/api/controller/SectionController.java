@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,10 +27,9 @@ public class SectionController {
   private final SectionService sectionService;
 
   @Operation(summary = "Delete section")
-  @DeleteMapping("/delete/{sectionId}/{courseId}")
-  public void deleteSection(@PathVariable("sectionId") String sectionId,
-      @PathVariable("courseId") String courseId) {
-    sectionService.deleteSection(sectionId, courseId);
+  @DeleteMapping("/{sectionId}/delete")
+  public void deleteSection(@PathVariable("sectionId") String sectionId) {
+    sectionService.deleteSection(sectionId);
   }
 
   @Operation(summary = "Create a new class")
@@ -40,5 +40,11 @@ public class SectionController {
     return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
         sectionService.addNewClassToSection(ClassRequestMapper.INSTANCE.toEntity(classBasicRequest),
             sectionId)));
+  }
+
+  @Operation(summary = "Activate section")
+  @PutMapping("/{sectionId}/change-status")
+  public void changeClassStatus(@PathVariable("sectionId") String sectionId) {
+    sectionService.changeSectionStatus(sectionId);
   }
 }

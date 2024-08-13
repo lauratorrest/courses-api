@@ -13,4 +13,6 @@ public interface ClassService {
   Class addClassVideo(MultipartFile video, String classId);
 
   void changeClassStatus(String classId);
+
+  void deleteByIds(List<String> classesIds);
 }
