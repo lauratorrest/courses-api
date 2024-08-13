@@ -8,6 +8,7 @@ import com.courses.service.CourseService;
 import com.courses.service.SectionService;
 import com.courses.service.exception.section.SectionDoesNotExistException;
 import com.courses.shared.exceptions.ExceptionCode;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -24,6 +25,7 @@ public class SectionServiceImpl implements SectionService {
 
   @Override
   public Section saveNewSection(Section section, String courseId) {
+    section.setCreatedDate(LocalDateTime.now());
     Section savedSection = SectionMapper.INSTANCE.toEntity(
         sectionRepository.save(SectionMapper.INSTANCE.toDto(section)));
     courseService.addCourseSection(savedSection.getId(), courseId);
@@ -33,10 +35,12 @@ public class SectionServiceImpl implements SectionService {
   @Override
   public void deleteSection(String sectionId, String courseId) {
     SectionDto sectionDto = validateExistingSection(sectionId);
-    if (!sectionDto.getClassesIds().isEmpty()) {
+    if (sectionDto.getClassesIds() == null || sectionDto.getClassesIds().isEmpty()) {
       courseService.deleteSectionFromCourse(sectionId, courseId);
       sectionRepository.deleteById(sectionId);
     }
+
+    //TODO:EXCEPTION FOR ACTIVE CLASSES
   }
 
   private SectionDto validateExistingSection(String sectionId) {

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "Sections API", description = "End-points for sections management")
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/section")
 public class SectionController {
 
   private final SectionService sectionService;

@@ -35,6 +35,7 @@ public class CourseDetailedRequest {
   @Schema(description = "Requirements for taking the course", example = "Basic knowledge of programming")
   private List<String> requirements;
   @Schema(description = "Detailed course description", example = "This course covers the basics of Java programming...")
+  @Size(max = 500, message = "Course description must be between {min} and {max} characters")
   private String description;
   @Schema(description = "Audience for whom the course is intended", example = "Beginners in programming")
   private List<String> courseIsFor;

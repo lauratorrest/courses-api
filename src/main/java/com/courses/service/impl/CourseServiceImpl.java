@@ -13,6 +13,7 @@ import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 import com.courses.shared.utils.StringFixProcesses;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -108,6 +109,9 @@ public class CourseServiceImpl implements CourseService {
   @Override
   public void addCourseSection(String sectionId, String courseId) {
     CourseDto courseDto = validateCourseDoesExists(courseId);
+    if (courseDto.getSectionIds() == null) {
+      courseDto.setSectionIds(new ArrayList<>());
+    }
     courseDto.getSectionIds().add(sectionId);
     courseRepository.save(courseDto);
   }
