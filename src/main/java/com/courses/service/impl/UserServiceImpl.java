@@ -115,6 +115,11 @@ public class UserServiceImpl implements UserService {
     userRepository.save(user);
   }
 
+  @Override
+  public User getUserById(String id) {
+    return UserMapper.INSTANCE.toEntity(userExistsValidation(id));
+  }
+
   private UserDto userExistsValidation(String id) {
     Optional<UserDto> userDto = userRepository.findById(id);
     if (userDto.isPresent()) {

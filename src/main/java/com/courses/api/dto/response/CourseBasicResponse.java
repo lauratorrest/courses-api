@@ -11,4 +11,5 @@ public class CourseBasicResponse {
   private String title;
   private String subTitle;
   private String mainPictureUrl;
+  private UserBasicResponse user;
 }

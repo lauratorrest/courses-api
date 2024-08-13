@@ -4,6 +4,7 @@ import com.courses.api.dto.request.CourseDetailedRequest;
 import com.courses.api.dto.request.CourseRequest;
 import com.courses.api.dto.request.SectionRequest;
 import com.courses.api.dto.response.CourseBasicResponse;
+import com.courses.api.dto.response.CourseDetailedResponse;
 import com.courses.api.dto.response.SectionResponse;
 import com.courses.api.mapper.request.CourseRequestMapper;
 import com.courses.api.mapper.request.SectionRequestMapper;
@@ -16,6 +17,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -84,5 +86,10 @@ public class CourseController {
 
   //TODO: Save All for testing
   //TODO:Call user courses
-  //TODO: Get course by ID
+
+  @Operation(summary = "Get course whole information")
+  @GetMapping("/{courseId}")
+  public ResponseEntity<CourseDetailedResponse> getCourseById(@PathVariable("courseId") String courseId){
+    return ResponseEntity.ok(CourseResponseMapper.INSTANCE.toDetailedResponse(courseService.findCourseDataById(courseId)));
+  }
 }

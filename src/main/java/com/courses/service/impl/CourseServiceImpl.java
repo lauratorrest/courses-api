@@ -2,6 +2,7 @@ package com.courses.service.impl;
 
 import com.courses.model.Course;
 import com.courses.model.Section;
+import com.courses.model.User;
 import com.courses.repository.course.CourseDto;
 import com.courses.repository.course.CourseMapper;
 import com.courses.repository.course.CourseRepository;
@@ -112,6 +113,8 @@ public class CourseServiceImpl implements CourseService {
   @Override
   public Course findCourseDataById(String courseId) {
     Course course = CourseMapper.INSTANCE.toEntity(validateCourseDoesExists(courseId));
+    User creator = userService.getUserById(course.getCreator().getId());
+    course.setCreator(creator);
     course.setSections(
         sectionService.findSectionsByIds(course.getSections().stream().map(Section::getId).collect(
             Collectors.toList())));

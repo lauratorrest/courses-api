@@ -14,4 +14,6 @@ public interface UserService {
   void setUserProfilePicture(MultipartFile picture, String userId);
 
   void addUserNewCourse(String userId, String courseId);
+
+  User getUserById(String id);
 }

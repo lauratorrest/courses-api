@@ -2,6 +2,7 @@ package com.courses.repository.course;
 
 import com.courses.model.Course;
 import com.courses.model.Section;
+import com.courses.model.User;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
@@ -15,9 +16,11 @@ public interface CourseMapper {
   CourseMapper INSTANCE = Mappers.getMapper(CourseMapper.class);
 
   @Mapping(source = "sections", target = "sectionIds", qualifiedByName = "mapSections")
+  @Mapping(source = "creator", target = "creatorId", qualifiedByName = "mapCreatorId")
   CourseDto toDto(Course course);
 
   @Mapping(source = "sectionIds", target = "sections", qualifiedByName = "mapSectionsIds")
+  @Mapping(source = "creatorId", target = "creator", qualifiedByName = "mapCreator")
   Course toEntity(CourseDto courseDto);
 
   @Named("mapSections")
@@ -32,6 +35,20 @@ public interface CourseMapper {
     return sectionIds != null
         ? sectionIds.stream().map(id -> Section.builder().id(id).build())
         .collect(Collectors.toList())
+        : null;
+  }
+
+  @Named("mapCreator")
+  default User mapCreator(String userId){
+    return userId != null
+        ? User.builder().id(userId).build()
+        : null;
+  }
+
+  @Named("mapCreatorId")
+  default String mapCreatorId(User user){
+    return user != null
+        ? user.getId()
         : null;
   }
 }

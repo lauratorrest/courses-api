@@ -29,6 +29,7 @@ public class CourseDto {
   private Double price;
   private List<String> skillsToLearn;
   private LocalDateTime createdDate;
+  private String creatorId;
   private LocalDateTime updatedDate;
   private Boolean certification;
   private List<String> requirements;
