@@ -64,12 +64,11 @@ public class CourseController {
 
   @Operation(summary = "set course as public/private")
   @PutMapping("/change-privacy-status/{courseId}")
-  public void changeCoursePrivacyStatus(@PathVariable("courseId") String courseId){
+  public void changeCoursePrivacyStatus(@PathVariable("courseId") String courseId) {
     courseService.changeCoursePrivacyStatus(courseId);
   }
 
-
-   //TODO: Save All for testing
+  //TODO: Save All for testing
   //TODO:Call user courses
   //TODO: Get course by ID
 }

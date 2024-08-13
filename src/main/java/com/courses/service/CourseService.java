@@ -14,4 +14,8 @@ public interface CourseService {
   void setCoursePresentationVideo(MultipartFile presentationVideo, String courseId);
 
   void changeCoursePrivacyStatus(String courseId);
+
+  void addCourseSection(String sectionId, String courseId);
+
+  void deleteSectionFromCourse(String sectionId, String courseId);
 }

@@ -52,7 +52,8 @@ public class CourseServiceImpl implements CourseService {
     currentCourse.setCategory(course.getCategory());
     currentCourse.setPrice(course.getPrice());
     currentCourse.setSkillsToLearn(course.getSkillsToLearn());
-    currentCourse.setCertification(course.getCertification() != null ? course.getCertification() : Boolean.FALSE);
+    currentCourse.setCertification(
+        course.getCertification() != null ? course.getCertification() : Boolean.FALSE);
     currentCourse.setRequirements(course.getRequirements());
     currentCourse.setCourseIsFor(course.getCourseIsFor());
     currentCourse.setUpdatedDate(LocalDateTime.now());
@@ -93,15 +94,29 @@ public class CourseServiceImpl implements CourseService {
   public void changeCoursePrivacyStatus(String courseId) {
     CourseDto currentCourse = validateCourseDoesExists(courseId);
 
-    if(currentCourse.getIsPublic() == Boolean.TRUE){
+    if (currentCourse.getIsPublic() == Boolean.TRUE) {
       currentCourse.setIsPublic(Boolean.FALSE);
-    }else{
+    } else {
       courseValidations.validateCompleteInfo(currentCourse);
       courseValidations.validateAtLeastOneClass(CourseMapper.INSTANCE.toEntity(currentCourse));
       currentCourse.setIsPublic(Boolean.TRUE);
     }
 
     courseRepository.save(currentCourse);
+  }
+
+  @Override
+  public void addCourseSection(String sectionId, String courseId) {
+    CourseDto courseDto = validateCourseDoesExists(courseId);
+    courseDto.getSectionIds().add(sectionId);
+    courseRepository.save(courseDto);
+  }
+
+  @Override
+  public void deleteSectionFromCourse(String sectionId, String courseId) {
+    CourseDto courseDto = validateCourseDoesExists(courseId);
+    courseDto.getSectionIds().remove(sectionId);
+    courseRepository.save(courseDto);
   }
 
   private CourseDto validateCourseDoesExists(String courseId) {

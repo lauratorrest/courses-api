@@ -13,7 +13,8 @@ public enum ExceptionCode {
   COURSE_NOT_FOUND("ERR-006", "Exception.COURSE_NOT_FOUND"),
   MAIN_PIC_NEEDED("ERR-007", "Exception.MAIN_PIC_NEEDED"),
   NO_CLASSES_FOUND("ERR-008", "Exception.NO_CLASSES_FOUND"),
-  UNCOMPLETED_DATA("ERR-009", "Exception.UNCOMPLETED_DATA");
+  UNCOMPLETED_DATA("ERR-009", "Exception.UNCOMPLETED_DATA"),
+  SECTION_NOT_FOUND("ERR-010", "Exception.SECTION_NOT_FOUND");
 
   private final String code;
   private final String type;
