@@ -28,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class CourseServiceImpl implements CourseService {
 
+  public static final String VIDEOS_FOLDER_NAME = "courses-presentation-videos";
+  public static final String PICTURE_FOLDER_NAME = "course-main-pics";
   private final CourseRepository courseRepository;
   private final UserService userService;
   private final StringFixProcesses stringFixProcesses;
@@ -72,7 +74,7 @@ public class CourseServiceImpl implements CourseService {
     if (mainPicture == null) {
       currentCourse.setMainPictureUrl(null);
     } else {
-      String picUrl = cloudinaryService.uploadFile(mainPicture, "course-main-pic",
+      String picUrl = cloudinaryService.uploadFile(mainPicture, PICTURE_FOLDER_NAME,
           Constants.FILE_TYPE_FOR_PICS_ALLOWED, Constants.PICS_MAX_SIZE);
       currentCourse.setMainPictureUrl(picUrl);
     }
@@ -87,7 +89,7 @@ public class CourseServiceImpl implements CourseService {
     if (presentationVideo == null || presentationVideo.isEmpty()) {
       currentCourse.setPresentationVideoUrl(null);
     } else {
-      String picUrl = cloudinaryService.uploadFile(presentationVideo, "course-presentation-video",
+      String picUrl = cloudinaryService.uploadFile(presentationVideo, VIDEOS_FOLDER_NAME,
           Constants.FILE_TYPE_FOR_VIDEOS_ALLOWED, Constants.VIDS_MAX_SIZE);
       currentCourse.setPresentationVideoUrl(picUrl);
     }

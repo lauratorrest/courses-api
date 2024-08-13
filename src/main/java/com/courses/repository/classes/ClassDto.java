@@ -17,7 +17,6 @@ public class ClassDto {
   private String id;
   private String title;
   private String videoUrl;
-  private Integer secondsCount;
   private Boolean watchedByCurrentUser;
   private ClassMaterialDto classMaterial;
   private List<String> questionsIds;
