@@ -7,6 +7,7 @@ import com.courses.api.mapper.request.CourseRequestMapper;
 import com.courses.api.mapper.response.CourseResponseMapper;
 import com.courses.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
+@Tag(name = "Courses API", description = "End-points for courses management")
 @RestController
 @RequestMapping("/course")
 public class CourseController {
@@ -59,4 +61,15 @@ public class CourseController {
       @PathVariable("courseId") String courseId) {
     courseService.setCoursePresentationVideo(presentationVideo, courseId);
   }
+
+  @Operation(summary = "set course as public/private")
+  @PutMapping("/change-privacy-status/{courseId}")
+  public void changeCoursePrivacyStatus(@PathVariable("courseId") String courseId){
+    courseService.changeCoursePrivacyStatus(courseId);
+  }
+
+
+   //TODO: Save All for testing
+  //TODO:Call user courses
+  //TODO: Get course by ID
 }

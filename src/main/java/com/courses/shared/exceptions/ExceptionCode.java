@@ -10,7 +10,10 @@ public enum ExceptionCode {
   USER_NOT_FOUND("ERR-003", "Exception.USER_NOT_FOUND"),
   FILE_TYPE_NOT_ALLOWED("ERR-004", "Exception.FILE_TYPE_NOT_ALLOWED"),
   FILE_EXCEEDS_ALLOWED_SIZE("ERR-005", "Exception.FILE_EXCEEDS_ALLOWED_SIZE"),
-  COURSE_NOT_FOUND("ERR-006", "Exception.COURSE_NOT_FOUND");
+  COURSE_NOT_FOUND("ERR-006", "Exception.COURSE_NOT_FOUND"),
+  MAIN_PIC_NEEDED("ERR-007", "Exception.MAIN_PIC_NEEDED"),
+  NO_CLASSES_FOUND("ERR-008", "Exception.NO_CLASSES_FOUND"),
+  UNCOMPLETED_DATA("ERR-009", "Exception.UNCOMPLETED_DATA");
 
   private final String code;
   private final String type;

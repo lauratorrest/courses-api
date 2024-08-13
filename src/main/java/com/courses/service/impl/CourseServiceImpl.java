@@ -7,7 +7,8 @@ import com.courses.repository.course.CourseRepository;
 import com.courses.service.CloudinaryService;
 import com.courses.service.CourseService;
 import com.courses.service.UserService;
-import com.courses.service.exception.CourseDoesNotExistException;
+import com.courses.service.exception.course.CourseDoesNotExistException;
+import com.courses.service.validation.CourseValidations;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 import com.courses.shared.utils.StringFixProcesses;
@@ -28,6 +29,7 @@ public class CourseServiceImpl implements CourseService {
   private final StringFixProcesses stringFixProcesses;
   private final CloudinaryService cloudinaryService;
   private final MessageSource messageSource;
+  private final CourseValidations courseValidations;
 
   public Course saveCourse(Course course, String userId) {
     course.setTitle(stringFixProcesses.removeSpaces(course.getTitle()));
@@ -50,7 +52,7 @@ public class CourseServiceImpl implements CourseService {
     currentCourse.setCategory(course.getCategory());
     currentCourse.setPrice(course.getPrice());
     currentCourse.setSkillsToLearn(course.getSkillsToLearn());
-    currentCourse.setCertification(course.getCertification());
+    currentCourse.setCertification(course.getCertification() != null ? course.getCertification() : Boolean.FALSE);
     currentCourse.setRequirements(course.getRequirements());
     currentCourse.setCourseIsFor(course.getCourseIsFor());
     currentCourse.setUpdatedDate(LocalDateTime.now());
@@ -82,6 +84,21 @@ public class CourseServiceImpl implements CourseService {
       String picUrl = cloudinaryService.uploadFile(presentationVideo, "course-presentation-video",
           Constants.FILE_TYPE_FOR_VIDEOS_ALLOWED, Constants.VIDS_MAX_SIZE);
       currentCourse.setPresentationVideoUrl(picUrl);
+    }
+
+    courseRepository.save(currentCourse);
+  }
+
+  @Override
+  public void changeCoursePrivacyStatus(String courseId) {
+    CourseDto currentCourse = validateCourseDoesExists(courseId);
+
+    if(currentCourse.getIsPublic() == Boolean.TRUE){
+      currentCourse.setIsPublic(Boolean.FALSE);
+    }else{
+      courseValidations.validateCompleteInfo(currentCourse);
+      courseValidations.validateAtLeastOneClass(CourseMapper.INSTANCE.toEntity(currentCourse));
+      currentCourse.setIsPublic(Boolean.TRUE);
     }
 
     courseRepository.save(currentCourse);

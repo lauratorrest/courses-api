@@ -12,4 +12,6 @@ public interface CourseService {
   void setCourseMainPicture(MultipartFile mainPicture, String courseId);
 
   void setCoursePresentationVideo(MultipartFile presentationVideo, String courseId);
+
+  void changeCoursePrivacyStatus(String courseId);
 }

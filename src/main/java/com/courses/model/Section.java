@@ -14,5 +14,5 @@ public class Section {
   @Id
   private String id;
   private String title;
-  private List<String> classesIds;
+  private List<Class> classes;
 }
