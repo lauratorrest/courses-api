@@ -86,9 +86,8 @@ public class CourseController {
                         courseId)));
     }
 
-    //TODO: Save All for testing
-    //TODO: Call user courses
     //TODO: Get courses with pagination
+    //TODO: Call user courses
 
     @Operation(summary = "Get course whole information")
     @GetMapping("/{courseId}/{currentUserId}")
