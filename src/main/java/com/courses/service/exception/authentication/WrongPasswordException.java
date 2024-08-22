@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class WrongPasswordException extends BaseException {
 
-  public WrongPasswordException(String message) {
-    super(false, HttpStatus.BAD_REQUEST, message, ExceptionCode.WRONG_PASSWORD);
-  }
+    public WrongPasswordException(String message) {
+        super(false, HttpStatus.BAD_REQUEST, message, ExceptionCode.WRONG_PASSWORD);
+    }
 }

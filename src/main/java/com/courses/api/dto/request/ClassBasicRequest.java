@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 public class ClassBasicRequest {
 
-  @Schema(description = "Class title")
-  @NotBlank(message = "Title must not be empty")
-  @Size(min = 5, max = 100, message = "Class title must be between {min} and {max} characters")
-  private String title;
+    @Schema(description = "Class title")
+    @NotBlank(message = "Title must not be empty")
+    @Size(min = 5, max = 100, message = "Class title must be between {min} and {max} characters")
+    private String title;
 }

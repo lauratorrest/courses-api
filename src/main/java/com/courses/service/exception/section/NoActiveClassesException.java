@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class NoActiveClassesException extends BaseException {
 
-  public NoActiveClassesException(String message) {
-    super(false, HttpStatus.CONFLICT, message, ExceptionCode.NO_ACTIVE_CLASSES);
-  }
+    public NoActiveClassesException(String message) {
+        super(false, HttpStatus.CONFLICT, message, ExceptionCode.NO_ACTIVE_CLASSES);
+    }
 }

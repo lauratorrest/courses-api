@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface UserResponseMapper {
 
-  UserResponseMapper INSTANCE = Mappers.getMapper(UserResponseMapper.class);
+    UserResponseMapper INSTANCE = Mappers.getMapper(UserResponseMapper.class);
 
-  UserLoginResponse toResponse(User user);
+    UserLoginResponse toResponse(User user);
 }

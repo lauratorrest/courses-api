@@ -24,27 +24,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/section")
 public class SectionController {
 
-  private final SectionService sectionService;
+    private final SectionService sectionService;
 
-  @Operation(summary = "Delete section")
-  @DeleteMapping("/{sectionId}/delete")
-  public void deleteSection(@PathVariable("sectionId") String sectionId) {
-    sectionService.deleteSection(sectionId);
-  }
+    @Operation(summary = "Delete section")
+    @DeleteMapping("/{sectionId}/delete")
+    public void deleteSection(@PathVariable("sectionId") String sectionId) {
+        sectionService.deleteSection(sectionId);
+    }
 
-  @Operation(summary = "Create a new class")
-  @PostMapping("/{sectionId}/add-class")
-  public ResponseEntity<ClassBasicResponse> createClass(
-      @RequestBody @Valid ClassBasicRequest classBasicRequest,
-      @PathVariable("sectionId") String sectionId) {
-    return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
-        sectionService.addNewClassToSection(ClassRequestMapper.INSTANCE.toEntity(classBasicRequest),
-            sectionId)));
-  }
+    @Operation(summary = "Create a new class")
+    @PostMapping("/{sectionId}/add-class")
+    public ResponseEntity<ClassBasicResponse> createClass(
+            @RequestBody @Valid ClassBasicRequest classBasicRequest,
+            @PathVariable("sectionId") String sectionId) {
+        return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
+                sectionService.addNewClassToSection(ClassRequestMapper.INSTANCE.toEntity(classBasicRequest),
+                        sectionId)));
+    }
 
-  @Operation(summary = "Activate section")
-  @PutMapping("/{sectionId}/change-status")
-  public void changeClassStatus(@PathVariable("sectionId") String sectionId) {
-    sectionService.changeSectionStatus(sectionId);
-  }
+    @Operation(summary = "Activate section")
+    @PutMapping("/{sectionId}/change-status")
+    public void changeClassStatus(@PathVariable("sectionId") String sectionId) {
+        sectionService.changeSectionStatus(sectionId);
+    }
 }

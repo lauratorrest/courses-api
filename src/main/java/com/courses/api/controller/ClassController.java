@@ -22,19 +22,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/class")
 public class ClassController {
 
-  private final ClassService classService;
+    private final ClassService classService;
 
-  @Operation(summary = "Add video to class")
-  @PostMapping(value = "/{classId}/add-video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public ResponseEntity<ClassBasicResponse> addClassVideo(@RequestBody MultipartFile video,
-      @PathVariable("classId") String classId) {
-    return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
-        classService.addClassVideo(video, classId)));
-  }
+    @Operation(summary = "Add video to class")
+    @PostMapping(value = "/{classId}/add-video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ClassBasicResponse> addClassVideo(@RequestBody MultipartFile video,
+                                                            @PathVariable("classId") String classId) {
+        return ResponseEntity.ok(ClassResponseMapper.INSTANCE.toResponse(
+                classService.addClassVideo(video, classId)));
+    }
 
-  @Operation(summary = "Activate class")
-  @PutMapping("/{classId}/change-status")
-  public void changeClassStatus(@PathVariable("classId") String classId) {
-    classService.changeClassStatus(classId);
-  }
+    @Operation(summary = "Activate class")
+    @PutMapping("/{classId}/change-status")
+    public void changeClassStatus(@PathVariable("classId") String classId) {
+        classService.changeClassStatus(classId);
+    }
 }

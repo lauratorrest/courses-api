@@ -1,6 +1,7 @@
 package com.courses.shared.exceptions;
 
 import java.time.LocalDate;
+
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -19,33 +20,33 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class BaseExceptionHandler {
 
-  @ExceptionHandler(BaseException.class)
-  public ResponseEntity<ErrorResponse> errorHandler(BaseException baseException) {
-    return new ResponseEntity<>(ErrorResponse.builder()
-        .status(baseException.getStatus())
-        .code(baseException.getCode())
-        .message(baseException.getMessage())
-        .date(baseException.getDate().toString())
-        .build(), HttpStatusCode.valueOf(baseException.getStatus().value()));
-  }
-
-  @ExceptionHandler(MethodArgumentNotValidException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ResponseBody
-  public ResponseEntity<ErrorResponse> handleValidationExceptions(
-      MethodArgumentNotValidException ex) {
-    StringBuilder errors = new StringBuilder();
-    ex.getBindingResult().getFieldErrors()
-        .forEach(fieldError -> errors.append(fieldError.getDefaultMessage()).append(", "));
-
-    // Eliminar la última coma y espacio extra
-    if (!errors.isEmpty()) {
-      errors.setLength(errors.length() - 2);
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<ErrorResponse> errorHandler(BaseException baseException) {
+        return new ResponseEntity<>(ErrorResponse.builder()
+                .status(baseException.getStatus())
+                .code(baseException.getCode())
+                .message(baseException.getMessage())
+                .date(baseException.getDate().toString())
+                .build(), HttpStatusCode.valueOf(baseException.getStatus().value()));
     }
 
-    return new ResponseEntity<>(
-        ErrorResponse.builder().status(HttpStatus.BAD_REQUEST).code("VALIDATIONS_ERROR")
-            .message(errors.toString()).date(LocalDate.now().toString()).build(),
-        HttpStatus.BAD_REQUEST);
-  }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        StringBuilder errors = new StringBuilder();
+        ex.getBindingResult().getFieldErrors()
+                .forEach(fieldError -> errors.append(fieldError.getDefaultMessage()).append(", "));
+
+        // Eliminar la última coma y espacio extra
+        if (!errors.isEmpty()) {
+            errors.setLength(errors.length() - 2);
+        }
+
+        return new ResponseEntity<>(
+                ErrorResponse.builder().status(HttpStatus.BAD_REQUEST).code("VALIDATIONS_ERROR")
+                        .message(errors.toString()).date(LocalDate.now().toString()).build(),
+                HttpStatus.BAD_REQUEST);
+    }
 }

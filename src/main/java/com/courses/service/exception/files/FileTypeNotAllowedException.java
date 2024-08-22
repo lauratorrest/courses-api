@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class FileTypeNotAllowedException extends BaseException {
 
-  public FileTypeNotAllowedException(String message) {
-    super(false, HttpStatus.BAD_REQUEST, message, ExceptionCode.FILE_TYPE_NOT_ALLOWED);
-  }
+    public FileTypeNotAllowedException(String message) {
+        super(false, HttpStatus.BAD_REQUEST, message, ExceptionCode.FILE_TYPE_NOT_ALLOWED);
+    }
 }

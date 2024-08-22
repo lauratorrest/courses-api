@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 public class ErrorResponse {
 
-  private HttpStatus status;
-  private String code;
-  private String message;
-  private String date;
+    private HttpStatus status;
+    private String code;
+    private String message;
+    private String date;
 }

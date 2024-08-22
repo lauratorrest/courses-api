@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class TooBigFileException extends BaseException {
 
-  public TooBigFileException(String message) {
-    super(false, HttpStatus.BAD_REQUEST, message, ExceptionCode.FILE_EXCEEDS_ALLOWED_SIZE);
-  }
+    public TooBigFileException(String message) {
+        super(false, HttpStatus.BAD_REQUEST, message, ExceptionCode.FILE_EXCEEDS_ALLOWED_SIZE);
+    }
 }

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class CourseWithUncompletedDataException extends BaseException {
 
-  public CourseWithUncompletedDataException(String message) {
-    super(false, HttpStatus.CONFLICT, message, ExceptionCode.UNCOMPLETED_DATA);
-  }
+    public CourseWithUncompletedDataException(String message) {
+        super(false, HttpStatus.CONFLICT, message, ExceptionCode.UNCOMPLETED_DATA);
+    }
 }

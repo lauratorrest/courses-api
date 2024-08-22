@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class CourseBasicResponse {
 
-  private String id;
-  private String title;
-  private String subTitle;
-  private String mainPictureUrl;
-  private UserBasicResponse user;
+    private String id;
+    private String title;
+    private String subTitle;
+    private String mainPictureUrl;
+    private UserBasicResponse user;
 }

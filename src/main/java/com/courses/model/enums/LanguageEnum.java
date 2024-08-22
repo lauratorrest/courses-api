@@ -2,5 +2,5 @@ package com.courses.model.enums;
 
 public enum LanguageEnum {
 
-  SPANISH, ENGLISH
+    SPANISH, ENGLISH
 }

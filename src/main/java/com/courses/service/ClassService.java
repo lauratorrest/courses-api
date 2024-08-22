@@ -1,18 +1,20 @@
 package com.courses.service;
 
 import com.courses.model.Class;
+
 import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ClassService {
 
-  Class saveClass(Class entity);
+    Class saveClass(Class entity);
 
-  List<Class> findClassesDataBySectionListIds(List<String> stringStream);
+    List<Class> findClassesDataBySectionListIds(List<String> stringStream);
 
-  Class addClassVideo(MultipartFile video, String classId);
+    Class addClassVideo(MultipartFile video, String classId);
 
-  void changeClassStatus(String classId);
+    void changeClassStatus(String classId);
 
-  void deleteByIds(List<String> classesIds);
+    void deleteByIds(List<String> classesIds);
 }

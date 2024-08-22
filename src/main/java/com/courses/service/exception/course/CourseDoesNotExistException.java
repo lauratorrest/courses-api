@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class CourseDoesNotExistException extends BaseException {
 
-  public CourseDoesNotExistException(String message) {
-    super(false, HttpStatus.NOT_FOUND, message, ExceptionCode.COURSE_NOT_FOUND);
-  }
+    public CourseDoesNotExistException(String message) {
+        super(false, HttpStatus.NOT_FOUND, message, ExceptionCode.COURSE_NOT_FOUND);
+    }
 }

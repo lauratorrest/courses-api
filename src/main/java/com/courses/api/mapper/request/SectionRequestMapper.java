@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface SectionRequestMapper {
 
-  SectionRequestMapper INSTANCE = Mappers.getMapper(SectionRequestMapper.class);
+    SectionRequestMapper INSTANCE = Mappers.getMapper(SectionRequestMapper.class);
 
-  Section toEntity(SectionRequest sectionRequest);
+    Section toEntity(SectionRequest sectionRequest);
 }

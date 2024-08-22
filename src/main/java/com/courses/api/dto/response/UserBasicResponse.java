@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class UserBasicResponse {
 
-  private String id;
-  private String name;
-  private String email;
-  private String profilePictureUrl;
+    private String id;
+    private String name;
+    private String email;
+    private String profilePictureUrl;
 }

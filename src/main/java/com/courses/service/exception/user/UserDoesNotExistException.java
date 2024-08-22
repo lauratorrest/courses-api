@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class UserDoesNotExistException extends BaseException {
 
-  public UserDoesNotExistException(String message) {
-    super(false, HttpStatus.NOT_FOUND, message, ExceptionCode.USER_NOT_FOUND);
-  }
+    public UserDoesNotExistException(String message) {
+        super(false, HttpStatus.NOT_FOUND, message, ExceptionCode.USER_NOT_FOUND);
+    }
 }

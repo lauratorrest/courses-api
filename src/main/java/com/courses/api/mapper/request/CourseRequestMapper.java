@@ -12,17 +12,17 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface CourseRequestMapper {
 
-  CourseRequestMapper INSTANCE = Mappers.getMapper(CourseRequestMapper.class);
+    CourseRequestMapper INSTANCE = Mappers.getMapper(CourseRequestMapper.class);
 
-  Course toModel(CourseRequest courseRequest);
+    Course toModel(CourseRequest courseRequest);
 
-  @Mapping(source = "language", target = "language", qualifiedByName = "mapLanguage")
-  Course toModel(CourseDetailedRequest courseDetailedRequest);
+    @Mapping(source = "language", target = "language", qualifiedByName = "mapLanguage")
+    Course toModel(CourseDetailedRequest courseDetailedRequest);
 
-  @Named("mapLanguage")
-  default LanguageEnum mapLanguage(String value) {
-    return value != null
-        ? LanguageEnum.valueOf(value)
-        : null;
-  }
+    @Named("mapLanguage")
+    default LanguageEnum mapLanguage(String value) {
+        return value != null
+                ? LanguageEnum.valueOf(value)
+                : null;
+    }
 }

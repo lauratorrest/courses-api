@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class CourseMainPictureNeededException extends BaseException {
 
-  public CourseMainPictureNeededException(String message) {
-    super(false, HttpStatus.CONFLICT, message, ExceptionCode.MAIN_PIC_NEEDED);
-  }
+    public CourseMainPictureNeededException(String message) {
+        super(false, HttpStatus.CONFLICT, message, ExceptionCode.MAIN_PIC_NEEDED);
+    }
 }

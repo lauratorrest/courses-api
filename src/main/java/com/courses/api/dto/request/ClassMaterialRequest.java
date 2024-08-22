@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class ClassMaterialRequest {
 
-  @Schema(description = "Class material description")
-  @Size(max = 100, message = "Description must be between {min} and {max} characters")
-  private String description;
+    @Schema(description = "Class material description")
+    @Size(max = 100, message = "Description must be between {min} and {max} characters")
+    private String description;
 }

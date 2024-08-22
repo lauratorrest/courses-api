@@ -10,12 +10,12 @@ import lombok.Setter;
 @Setter
 public class CourseRequest {
 
-  @Schema(description = "Course title")
-  @NotBlank(message = "Title must not be empty")
-  @Size(min = 5, max = 100, message = "Course title must be between {min} and {max} characters")
-  private String title;
-  @Schema(description = "Course subtitle")
-  @NotBlank(message = "Subtitle must not be empty")
-  @Size(min = 5, max = 200, message = "Course subtitle must be between {min} and {max} characters")
-  private String subTitle;
+    @Schema(description = "Course title")
+    @NotBlank(message = "Title must not be empty")
+    @Size(min = 5, max = 100, message = "Course title must be between {min} and {max} characters")
+    private String title;
+    @Schema(description = "Course subtitle")
+    @NotBlank(message = "Subtitle must not be empty")
+    @Size(min = 5, max = 200, message = "Course subtitle must be between {min} and {max} characters")
+    private String subTitle;
 }

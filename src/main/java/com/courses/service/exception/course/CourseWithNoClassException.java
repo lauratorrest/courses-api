@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class CourseWithNoClassException extends BaseException {
 
-  public CourseWithNoClassException(String message) {
-    super(false, HttpStatus.CONFLICT, message, ExceptionCode.NO_CLASSES_FOUND);
-  }
+    public CourseWithNoClassException(String message) {
+        super(false, HttpStatus.CONFLICT, message, ExceptionCode.NO_CLASSES_FOUND);
+    }
 }

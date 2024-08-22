@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class ClassWithNoVideoException extends BaseException {
 
-  public ClassWithNoVideoException(String message) {
-    super(false, HttpStatus.CONFLICT, message, ExceptionCode.CLASS_VIDEO_NEEDED);
-  }
+    public ClassWithNoVideoException(String message) {
+        super(false, HttpStatus.CONFLICT, message, ExceptionCode.CLASS_VIDEO_NEEDED);
+    }
 }
