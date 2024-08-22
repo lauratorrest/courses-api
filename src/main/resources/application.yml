@@ -13,3 +13,8 @@ cloudinary:
   cloud_name: ${CLOUDINARY_CLOUDNAME}
   api_key: ${CLOUDINARY_APIKEY}
   api_secret_key: ${CLOUDINARY_SECRETKEY}
+
+stripe:
+  api:
+    publicKey: ${STRIPE_PUBLICKEY}
+    secretKey: ${STRIPE_SECRETKEY}

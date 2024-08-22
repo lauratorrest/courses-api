@@ -65,6 +65,11 @@
 			<artifactId>cloudinary-http44</artifactId>
 			<version>1.31.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>22.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
