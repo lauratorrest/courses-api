@@ -87,7 +87,8 @@ public class CourseController {
     }
 
     //TODO: Get courses with pagination
-    //TODO: Call user courses
+    //TODO: Get courses filtered
+    //TODO: Call user courses (paginated)
 
     @Operation(summary = "Get course whole information")
     @GetMapping("/{courseId}/{currentUserId}")
