@@ -17,4 +17,5 @@ public class Constants {
     public static final long VIDS_MAX_SIZE = PICS_MAX_SIZE * 1000;
     public static final String VIDEOS_FOLDER_NAME = "courses-presentation-videos";
     public static final String PICTURE_FOLDER_NAME = "course-main-pics";
+    public static final String PROFILE_PIC_FOLDER_NAME = "profile-pics";
 }

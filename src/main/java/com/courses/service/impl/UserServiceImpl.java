@@ -30,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class UserServiceImpl implements UserService {
 
-    public static final String FOLDER_NAME = "profile-pics";
     private final UserRepository userRepository;
     private final StringFixProcesses stringFixProcesses;
     private final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
             user.setProfilePictureUrl(null);
         } else {
-            String pictureUrl = cloudinaryService.uploadFile(picture, FOLDER_NAME,
+            String pictureUrl = cloudinaryService.uploadFile(picture, Constants.PROFILE_PIC_FOLDER_NAME,
                     Constants.FILE_TYPE_FOR_PICS_ALLOWED, Constants.PICS_MAX_SIZE);
             user.setProfilePictureUrl(pictureUrl);
             user.setUpdatedDate(LocalDateTime.now());
