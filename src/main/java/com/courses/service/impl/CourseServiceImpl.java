@@ -10,7 +10,7 @@ import com.courses.service.CloudinaryService;
 import com.courses.service.CourseService;
 import com.courses.service.SectionService;
 import com.courses.service.UserService;
-import com.courses.service.exception.course.CourseDoesNotExistException;
+import com.courses.shared.exceptions.exception.course.CourseDoesNotExistException;
 import com.courses.service.validation.CourseValidations;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;

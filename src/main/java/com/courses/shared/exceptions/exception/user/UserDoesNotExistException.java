@@ -1,4 +1,4 @@
-package com.courses.service.exception.user;
+package com.courses.shared.exceptions.exception.user;
 
 import com.courses.shared.exceptions.BaseException;
 import com.courses.shared.exceptions.ExceptionCode;

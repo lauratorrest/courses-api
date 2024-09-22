@@ -3,9 +3,9 @@ package com.courses.service.validation;
 import com.courses.model.Class;
 import com.courses.model.Course;
 import com.courses.model.Section;
-import com.courses.service.exception.course.CourseMainPictureNeededException;
-import com.courses.service.exception.course.CourseWithNoClassException;
-import com.courses.service.exception.course.CourseWithUncompletedDataException;
+import com.courses.shared.exceptions.exception.course.CourseMainPictureNeededException;
+import com.courses.shared.exceptions.exception.course.CourseWithNoClassException;
+import com.courses.shared.exceptions.exception.course.CourseWithUncompletedDataException;
 import com.courses.shared.exceptions.ExceptionCode;
 
 import java.util.List;

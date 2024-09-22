@@ -7,8 +7,8 @@ import com.courses.repository.section.SectionMapper;
 import com.courses.repository.section.SectionRepository;
 import com.courses.service.ClassService;
 import com.courses.service.SectionService;
-import com.courses.service.exception.section.NoActiveClassesException;
-import com.courses.service.exception.section.SectionDoesNotExistException;
+import com.courses.shared.exceptions.exception.section.NoActiveClassesException;
+import com.courses.shared.exceptions.exception.section.SectionDoesNotExistException;
 import com.courses.shared.exceptions.ExceptionCode;
 
 import java.time.LocalDateTime;

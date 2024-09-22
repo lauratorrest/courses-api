@@ -6,8 +6,8 @@ import com.courses.repository.classes.ClassMapper;
 import com.courses.repository.classes.ClassRepository;
 import com.courses.service.ClassService;
 import com.courses.service.CloudinaryService;
-import com.courses.service.exception.classes.ClassDoesNotExistException;
-import com.courses.service.exception.classes.ClassWithNoVideoException;
+import com.courses.shared.exceptions.exception.classes.ClassDoesNotExistException;
+import com.courses.shared.exceptions.exception.classes.ClassWithNoVideoException;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 

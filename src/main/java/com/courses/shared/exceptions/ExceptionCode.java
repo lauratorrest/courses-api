@@ -17,7 +17,8 @@ public enum ExceptionCode {
     SECTION_NOT_FOUND("ERR-010", "Exception.SECTION_NOT_FOUND"),
     CLASS_NOT_FOUND("ERR-011", "Exception.CLASS_NOT_FOUND"),
     CLASS_VIDEO_NEEDED("ERR-012", "Exception.CLASS_VIDEO_NEEDED"),
-    NO_ACTIVE_CLASSES("ERR-013", "Exception.NO_ACTIVE_CLASSES");
+    NO_ACTIVE_CLASSES("ERR-013", "Exception.NO_ACTIVE_CLASSES"),
+    PAYMENT_FAILED("ERR-014", "Exception.PAYMENT_FAILED");
 
     private final String code;
     private final String type;

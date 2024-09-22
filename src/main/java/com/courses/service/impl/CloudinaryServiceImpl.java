@@ -2,8 +2,8 @@ package com.courses.service.impl;
 
 import com.cloudinary.Cloudinary;
 import com.courses.service.CloudinaryService;
-import com.courses.service.exception.files.FileTypeNotAllowedException;
-import com.courses.service.exception.files.TooBigFileException;
+import com.courses.shared.exceptions.exception.files.FileTypeNotAllowedException;
+import com.courses.shared.exceptions.exception.files.TooBigFileException;
 import com.courses.shared.exceptions.ExceptionCode;
 import com.courses.shared.utils.Constants;
 import jakarta.annotation.Resource;
